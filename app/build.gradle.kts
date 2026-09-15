@@ -10,21 +10,31 @@ plugins {
 
 android {
     namespace = "com.aleksandrgenrikhs.nivkhdictionary"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.aleksandrgenrikhs.nivkhdictionary"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 9
+        targetSdk = 36
+        versionCode = 11
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../upload-keystore.jks")
+            storePassword = project.findProperty("UPLOAD_STORE_PASSWORD") as String
+            keyAlias = "upload"
+            keyPassword = project.findProperty("UPLOAD_KEY_PASSWORD") as String
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
