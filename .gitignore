@@ -34,3 +34,7 @@ output.json
 #NDK
 obj/
 .externalNativeBuild
+
+# Release signing key
+upload-keystore.jks
+upload_certificate.pem
